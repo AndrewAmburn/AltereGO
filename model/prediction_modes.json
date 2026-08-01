@@ -1,0 +1,48 @@
+{
+  "models": {
+    "esm2": {
+      "weights_file": "esm2_mlp.safetensors",
+      "input_dimension": 2560
+    },
+    "prott5": {
+      "weights_file": "prott5_mlp.safetensors",
+      "input_dimension": 1024
+    },
+    "ankh": {
+      "weights_file": "ankh_mlp.safetensors",
+      "input_dimension": 1536
+    },
+    "prostt5_3di": {
+      "weights_file": "prostt5_3di_mlp.safetensors",
+      "input_dimension": 1024
+    }
+  },
+  "modes": {
+    "sequence_only": {
+      "models": ["esm2", "prott5", "ankh"],
+      "weights": {
+        "esm2": 0.40,
+        "prott5": 0.25,
+        "ankh": 0.35
+      },
+      "decision_threshold": 0.62
+    },
+    "structure_only": {
+      "models": ["prostt5_3di"],
+      "weights": {
+        "prostt5_3di": 1.0
+      },
+      "decision_threshold": 0.64
+    },
+    "sequence_and_structure": {
+      "models": ["esm2", "prott5", "ankh", "prostt5_3di"],
+      "weights": {
+        "esm2": 0.35,
+        "prott5": 0.25,
+        "ankh": 0.25,
+        "prostt5_3di": 0.15
+      },
+      "decision_threshold": 0.60
+    }
+  }
+}

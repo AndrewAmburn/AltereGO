@@ -1,0 +1,34 @@
+{
+  "format": "safetensors",
+  "architecture": {
+    "hidden_dimension": 2048,
+    "residual_blocks": 3,
+    "output_dimension": 8446
+  },
+  "models": {
+    "esm2": {
+      "file": "esm2_mlp.safetensors",
+      "input_dimension": 2560,
+      "parameter_count": 47761662,
+      "sha256": "9d89fb1ec12391921f787ec4c339e56db5c4b240c9f3c39c5c4777659c8df8d3"
+    },
+    "prott5": {
+      "file": "prott5_mlp.safetensors",
+      "input_dimension": 1024,
+      "parameter_count": 44615934,
+      "sha256": "28491373502c6e9408bfc50ea4f40f945a85baaf4196ddf5bda7b4920782493e"
+    },
+    "ankh": {
+      "file": "ankh_mlp.safetensors",
+      "input_dimension": 1536,
+      "parameter_count": 45664510,
+      "sha256": "d20c52bca63de7b12ecc5e48d1d87475b2419a466d0cf4a5ea0570922934289b"
+    },
+    "prostt5_3di": {
+      "file": "prostt5_3di_mlp.safetensors",
+      "input_dimension": 1024,
+      "parameter_count": 44615934,
+      "sha256": "65a661bc92f39f779d7466735b3cc8bdd62baf7f7ae3a199980630b76a7fcaa4"
+    }
+  }
+}

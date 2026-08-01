@@ -1,0 +1,24 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.pytest_cache/
+
+# Environments and editors
+.env
+.venv/
+.DS_Store
+
+# Crash files
+core
+core.*
+*.core
+
+# Generated example results
+example/*_predictions*.tsv
+example/*_predictions*.tsv.json
+
+# Generated example runs
+example/**/run_output/

@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "alterego"
+version = "0.1.0"
+description = "Multimodal Gene Ontology Molecular Function prediction using protein foundation models"
+readme = "README.md"
+requires-python = ">=3.10,<3.12"
+authors = [
+    {name = "Jason Andrew Amburn"}
+]
+dependencies = [
+    "numpy==1.26.4",
+    "pandas==2.3.3",
+    "torch>=2.4",
+    "transformers==4.57.6",
+    "fair-esm==2.0.0",
+    "ankh==1.10.0",
+    "safetensors==0.7.0",
+    "sentencepiece==0.1.99"
+]
+
+[project.scripts]
+alterego = "alterego.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools]
+package-dir = {"" = "src"}

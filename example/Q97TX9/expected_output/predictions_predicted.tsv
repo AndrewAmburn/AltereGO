@@ -1,0 +1,24 @@
+protein_id	go_id	name	definition	score	predicted
+Q97TX9	GO:0003674	molecular_function	A molecular process that can be carried out by the action of a single macromolecular machine, usually via direct physical interactions with other molecular entities. Function in this sense denotes an action, or activity, that a gene product (or a complex) performs.	0.9990605	True
+Q97TX9	GO:0005488	binding	The selective, non-covalent, often stoichiometric, interaction of a molecule with one or more specific sites on another molecule.	0.9674749	True
+Q97TX9	GO:0036094	small molecule binding	Binding to a small molecule, any low molecular weight, monomeric, non-encoded molecule.	0.9570115	True
+Q97TX9	GO:0043167	ion binding	Binding to an ion, a charged atoms or groups of atoms.	0.91961414	True
+Q97TX9	GO:0043169	cation binding	Binding to a cation, a charged atom or group of atoms with a net positive charge.	0.91928613	True
+Q97TX9	GO:0046872	metal ion binding	Binding to a metal ion.	0.91567945	True
+Q97TX9	GO:0051540	metal cluster binding	Binding to a cluster of atoms including both metal ions and nonmetal atoms, usually sulfur and oxygen. Examples include iron-sulfur clusters and nickel-iron-sulfur clusters.	0.91123825	True
+Q97TX9	GO:0051536	iron-sulfur cluster binding	Binding to an iron-sulfur cluster, a combination of iron and sulfur atoms.	0.9099109	True
+Q97TX9	GO:0003824	catalytic activity	Catalysis of a biochemical reaction at physiological temperatures. In biologically catalyzed reactions, the reactants are known as substrates, and the catalysts are naturally occurring macromolecular substances known as enzymes. Enzymes possess specific binding sites for substrates, and are usually composed wholly or largely of protein, but RNA that has catalytic activity (ribozyme) is often also regarded as enzymatic.	0.8998646	True
+Q97TX9	GO:0016787	hydrolase activity	Catalysis of the hydrolysis of various bonds, e.g. C-O, C-N, C-C, phosphoric anhydride bonds, etc.	0.8973397	True
+Q97TX9	GO:0051539	4 iron, 4 sulfur cluster binding	Binding to a 4 iron, 4 sulfur (4Fe-4S) cluster; this cluster consists of four iron atoms, with the inorganic sulfur atoms found between the irons and acting as bridging ligands.	0.87788475	True
+Q97TX9	GO:0140640	catalytic activity, acting on a nucleic acid	Catalytic activity that acts to modify a nucleic acid.	0.8732898	True
+Q97TX9	GO:0004518	nuclease activity	Catalysis of the cleavage of ester linkages within nucleic acids.	0.8655318	True
+Q97TX9	GO:0016788	hydrolase activity, acting on ester bonds	Catalysis of the hydrolysis of any ester bond.	0.84470487	True
+Q97TX9	GO:0004527	exonuclease activity	Catalysis of the hydrolysis of ester linkages within nucleic acids by removing nucleotide residues from the 3' or 5' end.	0.82751375	True
+Q97TX9	GO:0140097	catalytic activity, acting on DNA	Catalytic activity that acts to modify DNA.	0.80125225	True
+Q97TX9	GO:0004529	DNA exonuclease activity	Catalysis of the sequential cleavage of mononucleotides from a free 5' or 3' terminus of a DNA molecule.	0.79181474	True
+Q97TX9	GO:0004536	DNA nuclease activity	Catalysis of the cleavage of ester linkages within deoxyribonucleic acid.	0.79181474	True
+Q97TX9	GO:0035312	5'-3' DNA exonuclease activity	Catalysis of the sequential cleavage of mononucleotides from a free 5' terminus of a DNA molecule.	0.7733802	True
+Q97TX9	GO:0008409	5'-3' exonuclease activity	Catalysis of the hydrolysis of ester linkages within nucleic acids by removing nucleotide residues from the 5' end.	0.7733802	True
+Q97TX9	GO:0016895	DNA exonuclease activity, producing 5'-phosphomonoesters	Catalysis of the hydrolysis of ester linkages within deoxyribonucleic acids by removing nucleotide residues from the 3' or 5' end to yield 5' phosphomonoesters.	0.7733802	True
+Q97TX9	GO:0008297	single-stranded DNA exodeoxyribonuclease activity	Catalysis of the sequential cleavage of mononucleotides from a free 5' or 3' terminus of a single-stranded DNA molecule.	0.7295401	True
+Q97TX9	GO:0045145	single-stranded DNA 5'-3' DNA exonuclease activity	Catalysis of the sequential cleavage of nucleotides (such as mononucleotides or dinucleotides) from a free 5' terminus of a single-stranded DNA molecule.	0.71600735	True
