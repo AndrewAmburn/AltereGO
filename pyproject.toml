@@ -24,6 +24,7 @@ dependencies = [
 
 [project.scripts]
 alterego = "alterego.cli:main"
+alterego-batch = "alterego.batch_cli:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]

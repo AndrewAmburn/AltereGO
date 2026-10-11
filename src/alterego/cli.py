@@ -79,6 +79,16 @@ def build_parser() -> argparse.ArgumentParser:
         help=argparse.SUPPRESS,
     )
 
+    parser.add_argument(
+        "--exploratory",
+        action="store_true",
+        help=(
+            "Use an exploratory decision threshold of 0.50 instead of "
+            "the validated mode-specific threshold. Continuous scores "
+            "and fusion weights are unchanged."
+        ),
+    )
+
     return parser
 
 
@@ -133,6 +143,7 @@ def main() -> None:
     result = predictor.predict_from_embeddings(
         embeddings=embeddings,
         mode=mode,
+        exploratory=args.exploratory,
     )
 
     label_table = pd.read_csv(
@@ -211,6 +222,7 @@ def main() -> None:
         "protein_id": protein_id,
         "mode": result["mode"],
         "decision_threshold": result["threshold"],
+        "exploratory": bool(args.exploratory),
         "predicted_terms": int(binary.sum()),
         "output_file": str(
             args.output.resolve()

@@ -6,7 +6,7 @@ AltereGO predicts Gene Ontology (GO) Molecular Function annotations by combining
 
 AltereGO automatically selects one of three validated inference modes according to the supplied inputs.
 
-| Input | Models | Fusion weights | Decision threshold |
+| Input | Models | Fusion weights | Default decision threshold |
 |---|---|---|---:|
 | Sequence | ESM2-3B, ProtT5, Ankh-Large | 0.40, 0.25, 0.35 | 0.62 |
 | Structure | ProstT5-3Di | 1.00 | 0.64 |
@@ -15,6 +15,51 @@ AltereGO automatically selects one of three validated inference modes according 
 Sequence and structure arguments are individually optional, but at least one must be provided.
 
 The initial release accepts one protein sequence and one single-chain structure per run. When both inputs are supplied, the user is responsible for ensuring that they represent the same protein.
+
+## Exploratory prediction selection
+
+By default, AltereGO uses the validated decision threshold for the supplied
+input mode: 0.62 for sequence-only, 0.64 for structure-only, and 0.60 for
+combined inference.
+
+Add `--exploratory` to select GO terms whose final hierarchy-propagated score
+is greater than or equal to 0.50. This optional setting supports exploration
+of additional candidate functions.
+
+Embeddings, normalization, fusion weights, GO propagation, continuous scores,
+and score rankings remain unchanged. The 0.50 cutoff is an exploratory score
+threshold, not a calibrated 50/50 probability of biological function.
+Selecting more candidate terms may increase recall while reducing precision.
+
+### Sequence-only exploratory prediction
+
+    alterego --sequence protein.fasta --output exploratory_sequence.tsv --exploratory
+
+### Structure-only exploratory prediction
+
+    alterego --structure protein.pdb --output exploratory_structure.tsv --exploratory
+
+Foldseek must be on PATH or supplied through `--foldseek`.
+
+### Combined exploratory prediction
+
+    alterego --sequence protein.fasta --structure protein.pdb --output exploratory_combined.tsv --exploratory
+
+### Batch exploratory prediction
+
+    alterego-batch --sequence proteins.fasta --output exploratory_batch.tsv --device cuda --exploratory
+
+The batch command supports sequence-only inference and loads each foundation
+model once for all input records. Run `--device cuda` on a GPU-equipped node.
+
+The full TSV retains all scores. Its `predicted` column and the selected
+`_predicted.tsv` use the active decision threshold. JSON metadata records
+`decision_threshold` and the Boolean `exploratory` flag. Batch NPZ files also
+record the active threshold, binary predictions, and exploratory flag,
+including with `--compact`. Compact mode skips TSV and JSON outputs.
+
+Omit `--exploratory` to retain the validated default threshold. Use separate
+output paths when retaining both default and exploratory results.
 
 ## Installation
 
@@ -131,13 +176,14 @@ Output columns include:
 - `name`: GO term name
 - `definition`: GO term definition
 - `score`: hierarchy-propagated prediction score
-- `predicted`: whether the score meets the validated mode-specific threshold
+- `predicted`: whether the score meets the active threshold (the validated default or 0.50 with `--exploratory`)
 
 A JSON metadata file is written alongside the prediction table and records:
 
 - Protein identifier
 - Prediction mode
 - Decision threshold
+- Whether exploratory selection was enabled
 - Number of threshold-selected terms
 
 The complete ranked output is retained because biologically informative candidate functions may rank highly even when they do not exceed the global binary decision threshold.
@@ -274,3 +320,35 @@ This example verifies:
 - GO hierarchy propagation
 - Four-way score-level late fusion
 - Ranked and thresholded Molecular Function output
+
+## Batch sequence prediction
+
+AltereGO supports sequence prediction from multi-record FASTA files through the `alterego-batch` command. Each FASTA identifier must be unique. The sequence foundation models are loaded once and reused across all records, avoiding repeated model-loading overhead.
+
+```bash
+alterego-batch \
+  --sequence candidates.fasta \
+  --output batch_predictions.tsv \
+  --device cuda
+```
+
+The batch workflow applies the validated sequence-only fusion of ESM2-3B, ProtT5, and Ankh-Large. Records are processed sequentially within each foundation model to preserve the validated inference behavior and limit peak memory usage.
+
+The command produces:
+
+- `batch_predictions.tsv`: GO terms ranked by score for every protein.
+- `batch_predictions_predicted.tsv`: terms meeting the active sequence-only decision threshold.
+- `batch_predictions.npz`: complete score and binary-prediction matrices for all 8,446 GO terms.
+- `batch_predictions.tsv.json`: metadata describing the run.
+
+The human-readable TSV output can optionally be restricted to selected GO terms:
+
+```bash
+alterego-batch \
+  --sequence candidates.fasta \
+  --output selected_predictions.tsv \
+  --go-terms GO:0004518 GO:0051539 \
+  --device cuda
+```
+
+The NPZ archive retains the complete 8,446-term label space even when `--go-terms` is used. CPU batch inference is supported with `--device cpu`, although GPU inference is recommended for larger FASTA files.

@@ -107,9 +107,13 @@ class AltereGOPredictor:
         embeddings: Dict[str, np.ndarray],
         mode: str,
         batch_size: int = 1024,
+        exploratory: bool = False,
     ) -> Dict[str, object]:
         """
         Generate hierarchy-consistent AltereGO predictions.
+
+        Exploratory inference uses a 0.50 selection threshold without
+        changing continuous scores or fusion weights.
 
         Each standalone model output is propagated before fusion to
         reproduce the original model-development workflow.
@@ -224,8 +228,11 @@ class AltereGOPredictor:
             self.parents,
         )
 
-        threshold = float(
-            mode_config["decision_threshold"]
+        # Exploratory selection changes only the final decision threshold.
+        threshold = (
+            0.50
+            if exploratory
+            else float(mode_config["decision_threshold"])
         )
 
         binary_predictions = (
